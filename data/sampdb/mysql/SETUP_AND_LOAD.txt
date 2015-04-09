@@ -1,0 +1,66 @@
+SETUP AND LOAD FOR MYSQL
+
+Simply run the queries in setup_sampdb.sql to create the database.  (If the
+database exists this will erase the existing database and any changes made to
+its data.)
+
+See below for detail.
+
+
+RUNNING THE QUERIES
+
+Install Software
+----------------
+First, establish your ability to run SQL queries with some software tool.  The
+course uses MySQL Workbench, but other tools (such as Microsoft Access and
+Navicat) can work just as well.   These instructions walk through the process
+for Workbench.  Other tools will follow a similar process, but for these you'll
+have to figure out for yourself how to import and run a query in a file.  
+
+If you wish to use MySQL Workbench, install it and open a database connection
+within it.  Instructions for this are in README-SOFTWARE-INSTALLATION.txt in
+the directory above this.  Please contact me if you have problems with that
+installation and I will try to help.
+
+Setup Database
+--------------
+Having opened a database connection, you should see a "SQL Editor" tab.  This
+provides facilities for retrieving queries from a file, running those queries
+and displaying those queries' results.
+
+Query files can be opened from the menu bar, under File > Open SQL Script.
+Navigate to select "setup_sampdb.sql" and click "Open".
+-   A tab will appear within the window, with text for a lot of SQL commands
+    (queries).
+-   Run these queries (commands) from the menu bar: Query > Execute (All or
+    Selection).  A subwindow should fill with a long list of command status
+    reports.
+
+These queries:
+-   Create the database 'sampdb'
+-   Create the tables within it
+-   Load those tables with data
+
+Checking Success
+----------------
+In the Schemas subwindow to the left of the query text subwindow, click the
+little yin-yang refresh symbol.  The name 'sampdb' should appear on the list of
+schemas, with a little expansion triangle to the left of the name.
+
+You can check the database by running the query check_sampdb.sql.  Workbench
+should display a subwindow with a table with columns "TABLE_NAME" and
+"TABLE_ROWS".  There should be six rows, and the values in TABLE_ROWS should
+all be positive integers.
+
+
+CONTACT
+-------
+
+If you have any problems or questions, please send me an email.
+
+Gordon
+gordon@practicalhorseshoeing.com
+
+
+
+
