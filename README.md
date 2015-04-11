@@ -1,16 +1,37 @@
-### Import Data
+## Introductions & motivations [15 min]
+
+Hello - everyone say name and what they do.
+
+**Why SQL**?
+
+Why not filing cabinets?
+
+Why not Excel?
+  * speed (larger datasets)
+  * stability (data integrity)
+
+## Concepts & overview [30 min.]
+
+* SQL as a standard; most prevalent RDBMSes
+* Applications versus database
+  * SQL, because it is text based, can inte
+* Server, client, localhost, networking
+* Anatomy of a database
+  * Data model - tables are entities - example for dogs
+
+## Up and Running [15 mins]
 
 **I Do**
 
-Show them around the MYSQLWorkbench. Let's draw out ERD for users.
+Show them around the MYSQLWorkbench. 
 
-Data modeling?
+Set default database. not typical.
 
-Basic query `SELECT`
+Import data - `users.sql`
 
-* `users.sql`
+Let's draw out ERD for users.
 
-## Listing Information
+## Listing Stuff (90 mins)
 
 **Skills**:
 
@@ -33,7 +54,7 @@ Basic query `SELECT`
   * OR: Get californians, and anyone last named 'Diaz'
 * Functions
   * Get LENGTH of passwords
-  * >: Get users with passwords longer than 8 characters
+    * >: Get users with passwords longer than 8 characters (needs HAVING)
   * CONCAT: Full name as one field, full address as other field
 * DISTINCT
   * first names
@@ -50,7 +71,7 @@ Dataset: `president.sql`
 * list the unique first names of presidents
 * list the 10 youngest presidents
 
-## Relating Information
+## Relating Information (90 mins)
 
 **Skills**:
 
@@ -73,15 +94,20 @@ Draw ERD of band database.
   * Multiple order by
     * Order by album and then track position
 
-**You Do**
+### Exercise [20 minutes]
 
-Get a list of song names, member names, and instruments on the song
+`world.sql`
+
+* Find all languages spoken in Indonesia
+* See a list of North American countries and their accompanying languages
+* See a list of cities in China
+* See unique languages spoken in all Federal Republic
 
 ## Summarizing Information
 
 **Skills**:
 
-* COUNT, GROUP BY, SUM, AVG, HAVING, MIN
+* COUNT, GROUP BY, SUM, AVG, HAVING
 
 **Dataset**:
 
@@ -90,25 +116,31 @@ Get a list of song names, member names, and instruments on the song
 * COUNT
   * total number of albums
 * COUNT with condition
-  * total number of markets
+  * total number of quarters with greater than 180000
 * COUNT GROUP BY how many male and female users
 * SUM sales per album
+  * `select *, sum(gross) from sales group by album_id;`
 * AVG sales per quarter
-* HAVING sales greater than 100k
-* album with MIN global sales each year
+  * `select *, avg(gross) from sales group by quarter;`
+* Songs with more than 4 instruments
 * most profitable market each year
+  * `select *, sum(gross) from sales group by market, year;`
 
-### Exercise
+### Exercise [30 mins]
 
 `presidents.sql`
 
-* Total number of presidents coming from each state, ordered by state
+* Total number of presidents coming from each state, ordered
+* Number of presidents born after 1800.
 
-## Import CSV
+`countries.sql`
 
-Simple dataset - create table...
+* Find the top 5 countries in terms of language spoken
+* Calculate the average GDP grouped by continent
+* Top 5 countries in terms of average city size
+* Find the names of all cities in countries with a head of state named John
 
-## Lab - Flights
+## Lab - Flights (30 mins)
 
 Import `flights.sql`
 
@@ -116,4 +148,6 @@ Import `flights.sql`
 * Count the number of airlines that fly out of JFK
 * Count the number of routes per airline out of JFK
 
+## Import CSV (30 mins)
 
+Simple dataset - create table...

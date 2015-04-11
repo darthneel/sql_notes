@@ -1,6 +1,0 @@
-Run the queries in the file 'sampdb.dump.psql'.
-
-On the Mac Terminal command line, this is done as follows:
-
-    psql < sampdb.dump.psql
-
