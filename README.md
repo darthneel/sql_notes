@@ -25,9 +25,9 @@ Why not Excel?
 
 Show them around the MYSQLWorkbench. 
 
-Set default database. not typical.
+Set default database.
 
-Import data - `users.sql`
+Import data - `users.sql` 
 
 Let's draw out ERD for users.
 
@@ -84,8 +84,21 @@ Dataset: `president.sql`
 
 **I Do**
 
-Draw ERD of band database.
+Data modeling
 
+one -> many:
+  * company, employees
+
+many -> many:
+  * zipcar - customers, cars, rentals
+
+Create new SCHEMA
+Import band.sql
+
+Draw ERD of band database - albums, songs, sales.
+
+* SELECT WHERE id = foreign_key
+  - sales for a particular album
 * INNER JOIN
   * Get album sales including album name
 * Multiple joins
@@ -94,14 +107,22 @@ Draw ERD of band database.
   * Multiple order by
     * Order by album and then track position
 
-### Exercise [20 minutes]
+### Exercise <!-- [20 mins] -->
 
 `world.sql`
 
 * Find all languages spoken in Indonesia
 * See a list of North American countries and their accompanying languages
 * See a list of cities in China
-* See unique languages spoken in all Federal Republic
+* See unique languages spoken in all Federal Republics
+
+```sql
+SELECT * FROM CountryLanguage WHERE CountryLanguage.CountryCode = '';
+
+SELECT * FROM Country INNER JOIN CountryLanguage on Country.Code = CountryLanguage.CountryCode WHERE Continent = 'North America'; 
+
+SELECT DISTINCT CountryLanguage.Language FROM Country INNER JOIN CountryLanguage on Country.Code = CountryLanguage.CountryCode WHERE GovernmentForm = 'Federal Republic'; 
+```
 
 ## Summarizing Information
 
@@ -126,7 +147,7 @@ Draw ERD of band database.
 * most profitable market each year
   * `select *, sum(gross) from sales group by market, year;`
 
-### Exercise [30 mins]
+### Exercise
 
 `presidents.sql`
 
@@ -140,7 +161,11 @@ Draw ERD of band database.
 * Top 5 countries in terms of average city size
 * Find the names of all cities in countries with a head of state named John
 
-## Lab - Flights (30 mins)
+```sql
+SELECT Country.Name, COUNT(*) FROM Country INNER JOIN CountryLanguage on Country.Code = CountryLanguage.CountryCode GROUP BY Country.Code; 
+```
+
+## Lab - Flights
 
 Import `flights.sql`
 
