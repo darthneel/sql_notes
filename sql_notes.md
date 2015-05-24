@@ -1,65 +1,11 @@
 Starter Code Link - http://bit.ly/1Jnmh2R
 
-## Introductions & motivations [15 min]
+##SQL Bootcamp Demo and Exercise Solutions
 
-Hello - everyone say name and what they do.
 
-**Why SQL**?
+##Demo - `users.sql`
 
-Why use a database?
-  * data integrity
-  * recalling data
 
-Why not a sheet of paper and filing cabinets?
-
-Quick example:
-  * Attendance sheet for this class.
-  * What might be the issues in storing and working with data in this way?
-
-Why not Excel?
-  * speed (larger datasets)
-  * stability (data integrity)
-
-History Lesson
-  * SQL invented by IBM in the early 70's
-  * Response to important paper on relational data
-  * Databases use complex relational algebra and calculus
-  * We needed something human readable, so SQL was created
-
-## Concepts & overview [30 min.]
-
-* SQL as a standard; most prevalent RDBMSes
-* Applications versus database
-* Server, client, localhost, networking
-* Anatomy of a database
-What is relational data?
-  * Data model - tables are entities - example of dogs
-  * VERY brief example of dogs and dog owners
-* Goal of SQL is to easily allow us to work with subsets of data
-
-## Up and Running [15 mins]
-
-**I Do**
-
-Show them around the MYSQLWorkbench.
-
-Set default database.
-
-Import data - `users.sql`
-
-Let's draw out ERD for users.
-
-## Listing Stuff (90 mins)
-
-**Skills**:
-
-* SELECT, WHERE, ORDER BY, DISTINCT, LIMIT
-
-**Demo Dataset**:
-
-* `users.sql`
-
-**I Do**
 * Get all user data
 ```sql
   SELECT * FROM  users;
@@ -103,25 +49,14 @@ Let's draw out ERD for users.
   ```sql
   SELECT DISTINCT first_name FROM users;
   ```
-* COUNT
-  * number of users
-  ```sql
-  SELECT COUNT(*) FROM users;
-  ```
-  * We can combine function also
-    * how many states are users from
-    ```sql
-    SELECT COUNT(DISTINCT state) FROM users;
-    ```
 * LIMIT
   * Get 10 users
   ```sql
   SELECT DISTINCT first_name FROM users LIMIT 10;
   ```
 
-### Exercise [20/30 mins]
 
-Dataset: `president.sql`
+##Exercise -`president.sql`
 
 * List all columns for all presidents
 ```sql
@@ -144,31 +79,7 @@ SELECT DISTINCT first_name FROM presidents;
 SELECT * FROM presidents ORDER BY birth DESC LIMIT 10;
 ```
 
-## Relating Information (90 mins)
-
-**Skills**:
-
-* INNER JOIN
-* ERD
-
-**Demo Dataset**
-
-* `band.sql`
-
-**I Do**
-
-Data modeling
-
-one -> many:
-  * company, employees
-
-many -> many:
-  * zipcar - customers, cars, rentals
-
-Create new SCHEMA
-Import band.sql
-
-Draw ERD of band database - albums, songs, sales.
+##Demo - `band.sql`
 
 * SELECT WHERE id = foreign_key
 ```sql
@@ -179,11 +90,12 @@ SELECT * FROM sales WHERE album_id = 3;
   ```sql
   SELECT * FROM sales
   INNER JOIN albums
-    ON albums.id=sales.album_id;
+    ON albums.id=sales.album_id
+  WHERE albums.id = sales.album_id;
   ```
 * Multiple joins
   * Get song and album name for a single album
-  ```sql
+    ```sql
   SELECT albums.title, songs.title FROM albums
   INNER JOIN tracklists
   	ON albums.id=tracklists.album_id
@@ -212,9 +124,8 @@ SELECT * FROM sales WHERE album_id = 3;
       ORDER BY albums.title, tracklists.position;
       ```
 
-### Exercise <!-- [20 mins] -->
+##Exercise - `world.sql`
 
-`world.sql`
 
 * Find all languages spoken in Indonesia
 ```sql
@@ -245,15 +156,8 @@ INNER JOIN Country
 WHERE Country.GovernmentForm = "Federal Republic";
 ```
 
-## Summarizing Information
+##Demo - `band.sql`
 
-**Skills**:
-
-* COUNT, GROUP BY, SUM, AVG, HAVING
-
-**Dataset**:
-
-`band.sql`
 
 * COUNT
   * Total number of albums
@@ -291,7 +195,8 @@ INNER JOIN instruments
 HAVING total_instruments > 4;
 ```
 
-### Exercise
+##Demo - `presidents.sql`
+
 
 * Total number of presidents coming from each state, ordered
 ```sql
@@ -302,9 +207,9 @@ ORDER BY states_count DESC;
 * Number of presidents born after 1800.
 ```sql
 SELECT COUNT(*) FROM presidents WHERE birth > '1801-01-01';
-  ```
+```
 
-`countries.sql`
+##Demo - `countries.sql`
 
 * Find the top 5 countries in terms of language spoken
 ```sql
@@ -333,26 +238,3 @@ INNER JOIN City
   ON City.CountryCode = Country.Code
 WHERE Country.HeadOfState LIKE "John%";
 ```
-
-## Lab - Flights
-
-Import `flights.sql`
-
-* Count the number of airports
-  *
-  ```sql
-  SELECT COUNT(*) FROM airports;
-  ```
-* Count the number of airlines that fly out of JFK
-  *
-  ```sql
-  SELECT COUNT(*) FROM(
-  SELECT DISTINCT airlines.name FROM airports
-  INNER JOIN routes
-  	ON airports.id = routes.origin_id
-  INNER JOIN airlines
-  	ON airlines.id = routes.dest_id
-  WHERE airports.iata_faa = "JFK"
-  ) AS x;
-  ```
-* Count the number of routes per airline out of JFK
