@@ -32,10 +32,11 @@ History Lesson
 * Applications versus database
 * Server, client, localhost, networking
 * Anatomy of a database
-What is relational data?
-  * Data model - tables are entities - example of dogs
-  * VERY brief example of dogs and dog owners
-* Goal of SQL is to easily allow us to work with subsets of data
+  * Multiple schemas with multipel tables in each schema
+  * Example with Petco schema, dogs and owners table
+* What is relational data?
+  * VERY brief explanation of WHY we want dogs and dog owners to be related. (Do not yet discuss how to do it)
+* Goal of SQL is to easily allow us to recall and work with subsets of data
 
 ## Up and Running [15 mins]
 
@@ -94,7 +95,7 @@ Let's draw out ERD for users.
     ```sql
     SELECT * FROM users WHERE LENGTH(password) > 10;
     ```
-  * CONCAT: Full name as one field, full address as other field
+  * CONCAT: Full name as one field
   ```sql
   SELECT CONCAT_WS(' ', first_name, last_name) FROM users;
   ```
@@ -108,7 +109,7 @@ Let's draw out ERD for users.
   ```sql
   SELECT COUNT(*) FROM users;
   ```
-  * We can combine function also
+  * We can also combine functions 
     * how many states are users from
     ```sql
     SELECT COUNT(DISTINCT state) FROM users;
@@ -216,6 +217,7 @@ SELECT * FROM sales WHERE album_id = 3;
 
 `world.sql`
 
+
 * Find all languages spoken in Indonesia
 ```sql
 SELECT CountryLanguage.language FROM CountryLanguage
@@ -277,6 +279,12 @@ SELECT *, SUM(gross) FROM sales GROUP BY album_id;
 SELECT albums.title, SUM(gross) FROM sales
 INNER JOIN albums
  ON sales.album_id = albums.id
+GROUP BY albums.title;
+```
+```
+SELECT albums.title, CONCAT('$', FORMAT(SUM(gross), 0)) AS total_sales FROM sales
+INNER JOIN albums
+  ON sales.album_id = albums.id
 GROUP BY albums.title;
 ```
 * AVG sales per quarter
@@ -355,4 +363,3 @@ Import `flights.sql`
   WHERE airports.iata_faa = "JFK"
   ) AS x;
   ```
-* Count the number of routes per airline out of JFK

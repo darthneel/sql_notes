@@ -36,9 +36,9 @@ Starter Code Link - http://bit.ly/1Jnmh2R
   ```
 * **Functions**
   * Get LENGTH of passwords
-    * Get users with passwords longer than 8 characters
+    * Get users with passwords less than 10 characters
     ```sql
-    SELECT * FROM users WHERE LENGTH(password) > 10;
+    SELECT * FROM users WHERE LENGTH(password) < 10;
     ```
   * CONCAT: Full name as one field, full address as other field
   ```sql
