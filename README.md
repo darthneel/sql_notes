@@ -6,15 +6,16 @@ Hello - everyone say name and what they do.
 
 **Why SQL**?
 
-Why use a database?
-  * data integrity
-  * recalling data
-
-Why not a sheet of paper and filing cabinets?
+Q: Why use a database?
+  * Why not a sheet of paper and filing cabinets?
 
 Quick example:
   * Attendance sheet for this class.
   * What might be the issues in storing and working with data in this way?
+
+A:
+  * data integrity
+  * recalling data
 
 Why not Excel?
   * speed (larger datasets)
@@ -32,7 +33,7 @@ History Lesson
 * Applications versus database
 * Server, client, localhost, networking
 * Anatomy of a database
-  * Multiple schemas with multipel tables in each schema
+  * Multiple schemas with multiple tables in each schema
   * Example with Petco schema, dogs and owners table
 * What is relational data?
   * VERY brief explanation of WHY we want dogs and dog owners to be related. (Do not yet discuss how to do it)
@@ -128,7 +129,7 @@ Dataset: `president.sql`
 ```sql
 SELECT * FROM presidents;
 ```
-* List only last names and birth dates for all presidents in order from oldest
+* List only last names and birth dates for all presidents in order from oldest birth date to most recent
 ```sql
 SELECT last_name, birth FROM presidents ORDER BY birth DESC;
 ```
@@ -281,7 +282,7 @@ INNER JOIN albums
  ON sales.album_id = albums.id
 GROUP BY albums.title;
 ```
-```
+```sql
 SELECT albums.title, CONCAT('$', FORMAT(SUM(gross), 0)) AS total_sales FROM sales
 INNER JOIN albums
   ON sales.album_id = albums.id
@@ -300,6 +301,8 @@ HAVING total_instruments > 4;
 ```
 
 ### Exercise
+
+`presidents.sql`
 
 * Total number of presidents coming from each state, ordered
 ```sql
@@ -322,7 +325,7 @@ INNER JOIN CountryLanguage
 GROUP BY Country.name
 ORDER BY lang_count DESC LIMIT 5;
 ```
-* Calculate the average GDP grouped by continent
+* Calculate the average GNP grouped by continent
 ```sql
 SELECT continent, AVG(GNP) FROM Country GROUP BY continent;
 ```

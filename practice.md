@@ -1,15 +1,11 @@
+
 `presidents.sql`
 
 * Total number of presidents coming from each state, ordered
 
-* Number of presidents born after 1800.
-
-
-`countries.sql`
+`world.sql`
 
 * Find the top 5 countries in terms of language spoken
-
-* Calculate the average GNP grouped by continent
 
 * Top 5 countries in terms of average city size
 

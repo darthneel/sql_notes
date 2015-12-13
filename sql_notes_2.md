@@ -1,6 +1,6 @@
 Starter Code Link - http://bit.ly/1Jnmh2R
 
-##SQL Bootcamp Demo and Exercise Solutions
+#SQL Bootcamp Demo and Exercise Solutions
 
 
 ##Demo - `users.sql`
@@ -98,18 +98,18 @@ SELECT * FROM sales WHERE album_id = 3;
     ```sql
   SELECT albums.title, songs.title FROM albums
   INNER JOIN tracklists
-  	ON albums.id=tracklists.album_id
+    ON albums.id=tracklists.album_id
   INNER JOIN songs
-  	ON tracklists.song_id = songs.id
+    ON tracklists.song_id = songs.id
   WHERE albums.id = 2;
   ```
   * Order by track position
   ```sql
   SELECT albums.title, songs.title FROM albums
   INNER JOIN tracklists
-  	ON albums.id=tracklists.album_id
+    ON albums.id=tracklists.album_id
   INNER JOIN songs
-  	ON tracklists.song_id = songs.id
+    ON tracklists.song_id = songs.id
   WHERE albums.id = 1
   ORDER BY tracklists.position;
   ```
@@ -145,14 +145,14 @@ WHERE Country.continent = "North America"
 ```sql
 SELECT City.name FROM City
 INNER JOIN Country
-	ON Country.code = City.CountryCode
+  ON Country.code = City.CountryCode
 WHERE Country.name = "China";
 ```
 * See unique languages spoken in all Federal Republics
 ```sql
 SELECT DISTINCT CountryLanguage.language FROM CountryLanguage
 INNER JOIN Country
-	ON CountryLanguage.CountryCode = Country.code
+  ON CountryLanguage.CountryCode = Country.code
 WHERE Country.GovernmentForm = "Federal Republic";
 ```
 
@@ -195,7 +195,37 @@ INNER JOIN instruments
 HAVING total_instruments > 4;
 ```
 
-##Demo - `presidents.sql`
+#Extra Practice
+
+`presidents.sql`
+
+* Total number of presidents coming from each state, ordered
+
+* Number of presidents born after 1800.
+
+
+`countries.sql`
+
+* Find the top 5 countries in terms of language spoken
+
+* Calculate the average GNP grouped by continent
+
+* Top 5 countries in terms of average city size
+
+* Find the names of all cities in countries with a head of state named John
+
+`flights.sql`
+
+* Count the number of airports
+
+* Count the number of airlines that fly out of JFK
+  * Note - This will require a [subquery](https://sqlschool.modeanalytics.com/advanced/subqueries/)
+
+
+
+#Solutions for Extra Practice
+
+##Solution - `presidents.sql`
 
 
 * Total number of presidents coming from each state, ordered
@@ -209,7 +239,7 @@ ORDER BY states_count DESC;
 SELECT COUNT(*) FROM presidents WHERE birth > '1801-01-01';
 ```
 
-##Demo - `countries.sql`
+##Solution - `countries.sql`
 
 * Find the top 5 countries in terms of language spoken
 ```sql
@@ -237,4 +267,23 @@ SELECT City.Name, Country.Name FROM Country
 INNER JOIN City
   ON City.CountryCode = Country.Code
 WHERE Country.HeadOfState LIKE "John%";
+```
+
+##Solution - `flights.sql`
+
+* Count the number of airports
+```sql
+SELECT COUNT(*) FROM airports;
+```
+
+* Count the number of airlines that fly out of JFK
+```sql
+SELECT COUNT(*) FROM(
+SELECT DISTINCT airlines.name FROM airports
+INNER JOIN routes
+  ON airports.id = routes.origin_id
+INNER JOIN airlines
+  ON airlines.id = routes.dest_id
+WHERE airports.iata_faa = "JFK"
+) AS x;
 ```
